@@ -1,8 +1,8 @@
 package com.dtrajko.java.minefront.graphics;
 
 public class Render {
-	public final int width;
-	public final int height;
+	public int width;
+	public int height;
 	public final int[] pixels;
 
 	public Render(int width, int height) {

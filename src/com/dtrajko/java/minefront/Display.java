@@ -1,8 +1,10 @@
 package com.dtrajko.java.minefront;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -34,6 +36,7 @@ public class Display extends Canvas implements Runnable {
 	private static JFrame frame;
 	private int newX = 0;
 	private int oldX = 0;
+	private int fps;
 
 	public Display() {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
@@ -93,7 +96,8 @@ public class Display extends Canvas implements Runnable {
 				tickCount++;
 				if (tickCount % 60 == 0) {
 					// System.out.println(frames + " FPS");
-					frame.setTitle(TITLE + " [ " + frames + " fps ]");
+					frame.setTitle(TITLE + " [ " + frames + " FPS ]");
+					fps = frames;
 					previousTime += 1000;
 					frames = 0;
 				}
@@ -141,6 +145,9 @@ public class Display extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
+		g.setFont(new Font("Verdana", 0, 30));
+		g.setColor(Color.YELLOW);
+		g.drawString(fps + " FPS", 10, 30);
 		g.dispose();
 		bs.show();
 	}
@@ -152,7 +159,7 @@ public class Display extends Canvas implements Runnable {
 		frame = new JFrame();
 		frame.add(game);
 		frame.pack();
-		frame.getContentPane().setCursor(blank);
+		// frame.getContentPane().setCursor(blank);
 		frame.setTitle(TITLE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
